@@ -28,16 +28,23 @@ class HomeScreen extends StatelessWidget {
               style: Theme.of(context).textTheme.displayMedium,
             ),
             SizedBox(height: 50.h),
-            MainButton(
-              text: 'Streetlight Control',
-              onPressed: () =>
-                  Navigator.of(context).pushNamed(StreetlightScreen.routeName),
-            ),
-            SizedBox(height: 20.h),
-            MainButton(
-              text: 'Surveillance Video',
-              onPressed: () =>
-                  Navigator.of(context).pushNamed(SurvellianceScreen.routeName),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30),
+              child: Column(
+                children: [
+                  MainButton(
+                    text: 'Streetlight Control',
+                    onPressed: () => Navigator.of(context)
+                        .pushNamed(StreetlightScreen.routeName),
+                  ),
+                  SizedBox(height: 20.h),
+                  MainButton(
+                    text: 'Surveillance Video',
+                    onPressed: () => Navigator.of(context)
+                        .pushNamed(SurvellianceScreen.routeName),
+                  ),
+                ],
+              ),
             ),
           ],
         ),

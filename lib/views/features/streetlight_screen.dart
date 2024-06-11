@@ -35,11 +35,18 @@ class _StreetlightScreenState extends State<StreetlightScreen> {
               style: Theme.of(context).textTheme.displayMedium,
             ),
             SizedBox(height: 50.h),
-            const MainButton(text: 'Turn On', padding: 40),
-            SizedBox(height: 20.h),
-            const MainButton(text: 'Turn Off', padding: 40),
-            SizedBox(height: 20.h),
-            const MainButton(text: 'Automatic', padding: 40),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 90),
+              child: Column(
+                children: [
+                  const MainButton(text: 'Turn On', padding: 40),
+                  SizedBox(height: 20.h),
+                  const MainButton(text: 'Turn Off', padding: 40),
+                  SizedBox(height: 20.h),
+                  const MainButton(text: 'Automatic', padding: 40),
+                ],
+              ),
+            ),
           ],
         ),
       )),

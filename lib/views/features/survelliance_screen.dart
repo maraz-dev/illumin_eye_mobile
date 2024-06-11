@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:illumin_eye_mobile/views/widgets/main_button.dart';
 
@@ -28,31 +30,48 @@ class _SurvellianceScreenState extends State<SurvellianceScreen> {
               const Placeholder(
                 fallbackHeight: 250,
               ),
-              SizedBox(height: 30.h),
+              SizedBox(height: 40.h),
               Text(
                 "Survelliance Video",
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.displayMedium,
               ),
               SizedBox(height: 20.h),
-              const MainButton(text: 'View Full Screen', padding: 40),
-              SizedBox(height: 20.h),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  MainButton(text: 'Tilt Up', padding: 40),
-                  MainButton(text: 'Tilt Down', padding: 40),
-                ],
-              ),
-              SizedBox(height: 20.h),
-              const MainButton(text: 'Automatic', padding: 40),
-              SizedBox(height: 20.h),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  MainButton(text: 'Pan Left', padding: 40),
-                  MainButton(text: 'Pan Right', padding: 40),
-                ],
+
+              // Buttons
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Column(
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 60),
+                      child: MainButton(text: 'View Full Screen'),
+                    ),
+                    SizedBox(height: 30.h),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Expanded(child: MainButton(text: 'Tilt Up')),
+                        SizedBox(width: 30.w),
+                        const Expanded(child: MainButton(text: 'Tilt Down')),
+                      ],
+                    ),
+                    SizedBox(height: 30.h),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 60),
+                      child: MainButton(text: 'Center'),
+                    ),
+                    SizedBox(height: 30.h),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Expanded(child: MainButton(text: 'Pan Left')),
+                        SizedBox(width: 30.w),
+                        const Expanded(child: MainButton(text: 'Pan Right')),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
