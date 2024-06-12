@@ -6,4 +6,6 @@ class AppColors {
   static const kTextTitleColor = Color(0xFF161846);
   static const kBlack = Color(0xFF000000);
   static const kWhite = Color(0xFFFFFFFF);
+  static const kSuccessColor = Color(0xFF039855);
+  static const kErrorColor = Color(0xFFD92D20);
 }
