@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:illumin_eye_mobile/views/theme/app_colors.dart';
 import 'package:illumin_eye_mobile/views/widgets/main_button.dart';
-import 'package:video_player/video_player.dart';
 
 class SurvellianceScreen extends StatefulWidget {
   static const routeName = 'survelliance-screen';
