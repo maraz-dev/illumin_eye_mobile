@@ -1,5 +1,6 @@
 import 'package:appinio_video_player/appinio_video_player.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -59,131 +60,133 @@ class _SurvellianceScreenState extends State<SurvellianceScreen> {
               }
             },
             builder: (context, state) {
-              return Column(
-                children: [
-                  SizedBox(height: 20.h),
-                  // Small Frame Video
+              return SingleChildScrollView(
+                child: Column(
+                  children: [
+                    SizedBox(height: 20.h),
+                    // Small Frame Video
 
-                  _playerController.value.isInitialized
-                      ? CustomVideoPlayer(
-                          customVideoPlayerController: _customController)
-                      : const Center(
-                          child: SpinKitDualRing(
-                            color: AppColors.kPrimaryColor,
-                            size: 150,
-                            lineWidth: 2,
+                    _playerController.value.isInitialized
+                        ? CustomVideoPlayer(
+                            customVideoPlayerController: _customController)
+                        : const Center(
+                            child: SpinKitDualRing(
+                              color: AppColors.kPrimaryColor,
+                              size: 150,
+                              lineWidth: 2,
+                            ),
                           ),
-                        ),
 
-                  // Space
-                  SizedBox(height: 20.h),
+                    // Space
+                    SizedBox(height: 20.h),
 
-                  Image.network(
-                    '$esp32Url/stream.mp4',
-                    height: 480,
-                    width: double.infinity,
-                  ),
+                    Image.network(
+                      '$esp32Url/stream.mp4',
+                      height: 480,
+                      width: double.infinity,
+                    ),
 
-                  SizedBox(height: 20.h),
-                  _playerController.value.isInitialized
-                      ? AspectRatio(
-                          aspectRatio: _playerController.value.aspectRatio,
-                          child: CachedVideoPlayer(_playerController),
-                        )
-                      : const Placeholder(
-                          fallbackHeight: 250,
-                        ),
-                  SizedBox(height: 40.h),
-                  // Text(
-                  //   "Survelliance Video",
-                  //   textAlign: TextAlign.center,
-                  //   style: Theme.of(context).textTheme.displayMedium,
-                  // ),
-                  // SizedBox(height: 20.h),
+                    SizedBox(height: 20.h),
+                    _playerController.value.isInitialized
+                        ? AspectRatio(
+                            aspectRatio: _playerController.value.aspectRatio,
+                            child: CachedVideoPlayer(_playerController),
+                          )
+                        : const Placeholder(
+                            fallbackHeight: 250,
+                          ),
+                    SizedBox(height: 40.h),
+                    // Text(
+                    //   "Survelliance Video",
+                    //   textAlign: TextAlign.center,
+                    //   style: Theme.of(context).textTheme.displayMedium,
+                    // ),
+                    // SizedBox(height: 20.h),
 
-                  // // Buttons
-                  // Padding(
-                  //   padding: const EdgeInsets.symmetric(horizontal: 10),
-                  //   child: Column(
-                  //     children: [
-                  //       // Horizontal View Buttons
-                  //       Row(
-                  //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //         children: [
-                  //           Expanded(
-                  //             child: MainButton(
-                  //               isLoading: state is TiltUpLoadingState,
-                  //               text: 'Tilt Up',
-                  //               onPressed: () async {
-                  //                 await BlocProvider.of<SurvellianceCubit>(
-                  //                         context)
-                  //                     .tiltUp();
-                  //               },
-                  //             ),
-                  //           ),
-                  //           SizedBox(width: 30.w),
-                  //           Expanded(
-                  //             child: MainButton(
-                  //               isLoading: state is TiltDownLoadingState,
-                  //               text: 'Tilt Down',
-                  //               onPressed: () async {
-                  //                 await BlocProvider.of<SurvellianceCubit>(
-                  //                         context)
-                  //                     .tiltDown();
-                  //               },
-                  //             ),
-                  //           ),
-                  //         ],
-                  //       ),
-                  //       SizedBox(height: 30.h),
+                    // // Buttons
+                    // Padding(
+                    //   padding: const EdgeInsets.symmetric(horizontal: 10),
+                    //   child: Column(
+                    //     children: [
+                    //       // Horizontal View Buttons
+                    //       Row(
+                    //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //         children: [
+                    //           Expanded(
+                    //             child: MainButton(
+                    //               isLoading: state is TiltUpLoadingState,
+                    //               text: 'Tilt Up',
+                    //               onPressed: () async {
+                    //                 await BlocProvider.of<SurvellianceCubit>(
+                    //                         context)
+                    //                     .tiltUp();
+                    //               },
+                    //             ),
+                    //           ),
+                    //           SizedBox(width: 30.w),
+                    //           Expanded(
+                    //             child: MainButton(
+                    //               isLoading: state is TiltDownLoadingState,
+                    //               text: 'Tilt Down',
+                    //               onPressed: () async {
+                    //                 await BlocProvider.of<SurvellianceCubit>(
+                    //                         context)
+                    //                     .tiltDown();
+                    //               },
+                    //             ),
+                    //           ),
+                    //         ],
+                    //       ),
+                    //       SizedBox(height: 30.h),
 
-                  //       // Center View Buttons
-                  //       Padding(
-                  //         padding: const EdgeInsets.symmetric(horizontal: 60),
-                  //         child: MainButton(
-                  //           isLoading: state is CenterLoadingState,
-                  //           text: 'Center',
-                  //           onPressed: () async {
-                  //             await BlocProvider.of<SurvellianceCubit>(context)
-                  //                 .center();
-                  //           },
-                  //         ),
-                  //       ),
-                  //       SizedBox(height: 30.h),
+                    //       // Center View Buttons
+                    //       Padding(
+                    //         padding: const EdgeInsets.symmetric(horizontal: 60),
+                    //         child: MainButton(
+                    //           isLoading: state is CenterLoadingState,
+                    //           text: 'Center',
+                    //           onPressed: () async {
+                    //             await BlocProvider.of<SurvellianceCubit>(context)
+                    //                 .center();
+                    //           },
+                    //         ),
+                    //       ),
+                    //       SizedBox(height: 30.h),
 
-                  //       // Vertical View Buttons
-                  //       Row(
-                  //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //         children: [
-                  //           Expanded(
-                  //             child: MainButton(
-                  //               isLoading: state is PanLeftLoadingState,
-                  //               text: 'Pan Left',
-                  //               onPressed: () async {
-                  //                 await BlocProvider.of<SurvellianceCubit>(
-                  //                         context)
-                  //                     .panLeft();
-                  //               },
-                  //             ),
-                  //           ),
-                  //           SizedBox(width: 30.w),
-                  //           Expanded(
-                  //             child: MainButton(
-                  //               isLoading: state is PanRightLoadingState,
-                  //               text: 'Pan Right',
-                  //               onPressed: () async {
-                  //                 await BlocProvider.of<SurvellianceCubit>(
-                  //                         context)
-                  //                     .panRight();
-                  //               },
-                  //             ),
-                  //           ),
-                  //         ],
-                  //       ),
-                  //     ],
-                  //   ),
-                  // ),
-                ],
+                    //       // Vertical View Buttons
+                    //       Row(
+                    //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //         children: [
+                    //           Expanded(
+                    //             child: MainButton(
+                    //               isLoading: state is PanLeftLoadingState,
+                    //               text: 'Pan Left',
+                    //               onPressed: () async {
+                    //                 await BlocProvider.of<SurvellianceCubit>(
+                    //                         context)
+                    //                     .panLeft();
+                    //               },
+                    //             ),
+                    //           ),
+                    //           SizedBox(width: 30.w),
+                    //           Expanded(
+                    //             child: MainButton(
+                    //               isLoading: state is PanRightLoadingState,
+                    //               text: 'Pan Right',
+                    //               onPressed: () async {
+                    //                 await BlocProvider.of<SurvellianceCubit>(
+                    //                         context)
+                    //                     .panRight();
+                    //               },
+                    //             ),
+                    //           ),
+                    //         ],
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
+                  ],
+                ),
               );
             },
           ),
