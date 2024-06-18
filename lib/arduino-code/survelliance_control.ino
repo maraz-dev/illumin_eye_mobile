@@ -9,7 +9,6 @@
 #include "SD_MMC.h"
 #include "driver/rtc_io.h"
 
-
 // Pin definition for ESP32CAM module
 #define PWDN_GPIO_NUM    32
 #define RESET_GPIO_NUM   -1
@@ -53,6 +52,7 @@ Servo servoTilt;
 int currentPanAngle = 90; // Center position
 int currentTiltAngle = 90; // Center position
 bool motionDetected = false;
+bool motionLogged = false;
 String motionDirection = "";
 
 void setup() {
@@ -81,6 +81,11 @@ void setup() {
   IPAddress myIP = WiFi.softAPIP(); 
   Serial.print("AP IP Address: ");
   Serial.println(myIP);
+
+  if (myIP != local_IP) {
+    Serial.println("Warning: IP mismatch");
+  }
+
   server.begin();
   Serial.println("Server Started");
 
@@ -92,19 +97,30 @@ void loop() {
   server.handleClient();
 
   static unsigned long lastMotionTime = 0;
+  static unsigned long lastDebounceTime = 0;
+  const unsigned long debounceDelay = 200; // 200 milliseconds debounce delay
   unsigned long currentTime = millis();
 
-  // Check for motion detection
-  if (digitalRead(PIR_LEFT_PIN) == HIGH) {
-    Serial.println("Motion detected on the left!");
-    motionDetected = true;
-    motionDirection = "left";
-    lastMotionTime = currentTime;
-  } else if (digitalRead(PIR_RIGHT_PIN) == HIGH) {
-    Serial.println("Motion detected on the right!");
-    motionDetected = true;
-    motionDirection = "right";
-    lastMotionTime = currentTime;
+  bool leftMotion = digitalRead(PIR_LEFT_PIN) == HIGH;
+  bool rightMotion = digitalRead(PIR_RIGHT_PIN) == HIGH;
+
+  if ((leftMotion || rightMotion) && (currentTime - lastDebounceTime > debounceDelay)) {
+    lastDebounceTime = currentTime;
+    if (leftMotion && motionDirection != "left") {
+      Serial.println("Motion detected on the left!");
+      motionDetected = true;
+      motionDirection = "left";
+      motionLogged = true;
+      lastMotionTime = currentTime;
+    } else if (rightMotion && motionDirection != "right") {
+      Serial.println("Motion detected on the right!");
+      motionDetected = true;
+      motionDirection = "right";
+      motionLogged = true;
+      lastMotionTime = currentTime;
+    }
+  } else if (!leftMotion && !rightMotion) {
+    motionLogged = false;
   }
 
   // If motion detected, move servos towards the detected direction
@@ -193,9 +209,10 @@ void startCameraServer() {
 
       response = "--frame\r\nContent-Type: image/jpeg\r\nContent-Length: " + String(fb->len) + "\r\n\r\n";
       server.sendContent(response);
-      server.sendContent((const char *)fb->buf);
       server.sendContent((const char *)fb->buf, fb->len);
+      server.sendContent("\r\n");
       esp_camera_fb_return(fb);
+      delay(100); // Added to help with stability
     }
   });
 
@@ -238,6 +255,7 @@ void handleControl() {
 }
 
 void handleNotFound() {
+  Serial.printf("404 Not Found: %s\n", server.uri().c_str());
   server.send(404, "text/plain", "Not found");
 }
 

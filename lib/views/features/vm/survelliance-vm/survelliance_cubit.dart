@@ -60,7 +60,7 @@ class SurvellianceCubit extends Cubit<SurvellianceState> {
   Future<void> streamMethod() async {
     emit(StreamLoadingState());
     try {
-      final response = await _service.centerEndpoint();
+      final response = await _service.streamEndpoint();
       emit(StreamSuccessfulState(message: response));
     } catch (e) {
       emit(SurvellianceErrorState(errorMessage: e.toString()));

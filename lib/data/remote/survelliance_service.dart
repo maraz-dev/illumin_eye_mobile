@@ -108,7 +108,7 @@ class SurvellianceService {
           onSuccess: () {
             return 'Stream Started';
           });
-      return 'Stream Started';
+      return '$esp32Url/stream';
     } catch (e) {
       throw e.toString();
     }
