@@ -25,7 +25,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
-	<dict>
+	<true/>
 	<key>NSAllowsArbitraryLoads</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
