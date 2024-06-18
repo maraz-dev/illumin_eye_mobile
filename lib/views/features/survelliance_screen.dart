@@ -1,6 +1,5 @@
 import 'package:appinio_video_player/appinio_video_player.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -9,6 +8,8 @@ import 'package:illumin_eye_mobile/views/features/vm/survelliance-vm/survellianc
 import 'package:illumin_eye_mobile/views/features/vm/survelliance-vm/survelliance_state.dart';
 import 'package:illumin_eye_mobile/views/theme/app_colors.dart';
 import 'package:illumin_eye_mobile/views/utils/snackbar.dart';
+import 'package:video_player/video_player.dart';
+
 import 'package:illumin_eye_mobile/views/widgets/main_button.dart';
 
 class SurvellianceScreen extends StatefulWidget {
@@ -21,8 +22,9 @@ class SurvellianceScreen extends StatefulWidget {
 
 class _SurvellianceScreenState extends State<SurvellianceScreen> {
   // Controller for the Video
-  late CachedVideoPlayerController _playerController;
-  late CustomVideoPlayerController _customController;
+  //late CachedVideoPlayerController _playerController;
+  late VideoPlayerController _controller;
+  //late CustomVideoPlayerController _customController;
 
   @override
   void initState() {
@@ -31,14 +33,20 @@ class _SurvellianceScreenState extends State<SurvellianceScreen> {
   }
 
   void initializeVideoPlayer() {
-    _playerController =
-        CachedVideoPlayerController.network('$esp32Url/stream.mp4')
-          ..initialize().then((_) {
-            setState(() {});
-            _playerController.play();
-          });
-    _customController = CustomVideoPlayerController(
-        context: context, videoPlayerController: _playerController);
+    _controller = VideoPlayerController.network('$esp32Url/stream.mp4')
+      ..initialize().then((_) {
+        setState(() {});
+        _controller.play();
+      });
+    // _playerController = CachedVideoPlayerController.network(
+    //     '$esp32Url/stream.mp4',
+    //     videoPlayerOptions: VideoPlayerOptions())
+    //   ..initialize().then((_) {
+    //     setState(() {});
+    //     _playerController.play();
+    //   });
+    // _customController = CustomVideoPlayerController(
+    //     context: context, videoPlayerController: _playerController);
   }
 
   @override
@@ -66,9 +74,11 @@ class _SurvellianceScreenState extends State<SurvellianceScreen> {
                     SizedBox(height: 20.h),
                     // Small Frame Video
 
-                    _playerController.value.isInitialized
-                        ? CustomVideoPlayer(
-                            customVideoPlayerController: _customController)
+                    _controller.value.isInitialized
+                        ? AspectRatio(
+                            aspectRatio: _controller.value.aspectRatio,
+                            child: VideoPlayer(_controller),
+                          )
                         : const Center(
                             child: SpinKitDualRing(
                               color: AppColors.kPrimaryColor,
@@ -86,15 +96,6 @@ class _SurvellianceScreenState extends State<SurvellianceScreen> {
                       width: double.infinity,
                     ),
 
-                    SizedBox(height: 20.h),
-                    _playerController.value.isInitialized
-                        ? AspectRatio(
-                            aspectRatio: _playerController.value.aspectRatio,
-                            child: CachedVideoPlayer(_playerController),
-                          )
-                        : const Placeholder(
-                            fallbackHeight: 250,
-                          ),
                     SizedBox(height: 40.h),
                     // Text(
                     //   "Survelliance Video",
