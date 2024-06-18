@@ -30,11 +30,12 @@ class _SurvellianceScreenState extends State<SurvellianceScreen> {
   }
 
   void initializeVideoPlayer() {
-    _playerController = CachedVideoPlayerController.network('$esp32Url/stream')
-      ..initialize().then((_) {
-        setState(() {});
-        _playerController.play();
-      });
+    _playerController =
+        CachedVideoPlayerController.network('$esp32Url/stream.mp4')
+          ..initialize().then((_) {
+            setState(() {});
+            _playerController.play();
+          });
     _customController = CustomVideoPlayerController(
         context: context, videoPlayerController: _playerController);
   }
@@ -75,22 +76,23 @@ class _SurvellianceScreenState extends State<SurvellianceScreen> {
                         ),
 
                   // Space
-                  SizedBox(height: 40.h),
+                  SizedBox(height: 20.h),
 
                   Image.network(
-                    '$esp32Url/stream',
+                    '$esp32Url/stream.mp4',
                     height: 480,
                     width: double.infinity,
                   ),
 
-                  // _playerController.value.isInitialized
-                  //     ? AspectRatio(
-                  //         aspectRatio: _playerController.value.aspectRatio,
-                  //         child: CachedVideoPlayer(_playerController),
-                  //       )
-                  //     : const Placeholder(
-                  //         fallbackHeight: 250,
-                  //       ),
+                  SizedBox(height: 20.h),
+                  _playerController.value.isInitialized
+                      ? AspectRatio(
+                          aspectRatio: _playerController.value.aspectRatio,
+                          child: CachedVideoPlayer(_playerController),
+                        )
+                      : const Placeholder(
+                          fallbackHeight: 250,
+                        ),
                   SizedBox(height: 40.h),
                   // Text(
                   //   "Survelliance Video",

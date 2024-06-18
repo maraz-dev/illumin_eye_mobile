@@ -32,7 +32,7 @@ const char* ssid = "illumineye";
 const char* password = "";
 
 // Static IP configuration
-IPAddress local_IP(172,16,16,30); // Choose an IP outside the DHCP range
+IPAddress local_IP(172,16,16,31); // Choose an IP outside the DHCP range
 IPAddress gateway(172,16,16,254); // Default gateway IP from ipconfig/ifconfig
 IPAddress subnet(255,255,255,0); // Subnet mask from ipconfig/ifconfig
 
