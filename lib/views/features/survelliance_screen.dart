@@ -43,8 +43,7 @@ class _SurvellianceScreenState extends State<SurvellianceScreen> {
     _webViewController = WebViewController()..loadHtmlString('''
             <html>
               <body>
-              <h1>ESP32CAM Surveillance</h1>
-                <img src="$esp32Url/stream.mp4" width="" height="" />
+              <img src="$esp32Url/stream.mp4" width="" height="" />
               </body>
             </html>
           ''');
