@@ -8,6 +8,8 @@ class TiltUpLoadingState extends SurvellianceState {}
 
 class TiltDownLoadingState extends SurvellianceState {}
 
+class CenterLoadingState extends SurvellianceState {}
+
 class PanLeftLoadingState extends SurvellianceState {}
 
 class PanRightLoadingState extends SurvellianceState {}

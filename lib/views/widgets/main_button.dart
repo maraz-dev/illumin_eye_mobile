@@ -18,6 +18,7 @@ class MainButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      splashColor: Colors.transparent,
       onTap: onPressed,
       child: Container(
         width: double.infinity,

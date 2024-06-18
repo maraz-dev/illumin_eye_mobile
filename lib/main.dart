@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:illumin_eye_mobile/views/features/home_screen.dart';
 import 'package:illumin_eye_mobile/views/features/splash_screen.dart';
 import 'package:illumin_eye_mobile/views/features/streetlight_screen.dart';
 import 'package:illumin_eye_mobile/views/features/survelliance_screen.dart';
+import 'package:illumin_eye_mobile/views/features/vm/streetlight-vm/streetlight_cubit.dart';
+import 'package:illumin_eye_mobile/views/features/vm/survelliance-vm/survelliance_cubit.dart';
 import 'package:illumin_eye_mobile/views/theme/app_theme.dart';
 
 // Replace with IP Address of the ESP32
@@ -23,24 +26,31 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: const Size(375, 812),
-      minTextAdapt: true,
-      splitScreenMode: true,
-      builder: (context, child) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          initialRoute: SplashScreen.routeName,
-          theme: themeData(),
-          routes: {
-            SplashScreen.routeName: (context) => const SplashScreen(),
-            HomeScreen.routeName: (context) => const HomeScreen(),
-            StreetlightScreen.routeName: (context) => const StreetlightScreen(),
-            SurvellianceScreen.routeName: (context) =>
-                const SurvellianceScreen(),
-          },
-        );
-      },
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<SurvellianceCubit>(create: (_) => SurvellianceCubit()),
+        BlocProvider<StreetlightCubit>(create: (_) => StreetlightCubit()),
+      ],
+      child: ScreenUtilInit(
+        designSize: const Size(375, 812),
+        minTextAdapt: true,
+        splitScreenMode: true,
+        builder: (context, child) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            initialRoute: SplashScreen.routeName,
+            theme: themeData(),
+            routes: {
+              SplashScreen.routeName: (context) => const SplashScreen(),
+              HomeScreen.routeName: (context) => const HomeScreen(),
+              StreetlightScreen.routeName: (context) =>
+                  const StreetlightScreen(),
+              SurvellianceScreen.routeName: (context) =>
+                  const SurvellianceScreen(),
+            },
+          );
+        },
+      ),
     );
   }
 }
