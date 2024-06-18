@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:illumin_eye_mobile/data/service.dart';
+import 'package:illumin_eye_mobile/main.dart';
 import 'package:illumin_eye_mobile/views/utils/app_images.dart';
 import 'package:illumin_eye_mobile/views/utils/snackbar.dart';
 import 'package:illumin_eye_mobile/views/widgets/main_button.dart';
@@ -30,9 +30,9 @@ class _StreetlightScreenState extends State<StreetlightScreen> {
     try {
       // Change the State of the button to Loading before making the request
       setState(() {
-        if (endpoint == 'H') {
+        if (endpoint == 'LED/on') {
           _isTurnOnLoading = true;
-        } else if (endpoint == 'L') {
+        } else if (endpoint == 'LED/off') {
           _isTurnOffLoading = true;
         } else {
           _isLightLoading = true;
@@ -40,10 +40,10 @@ class _StreetlightScreenState extends State<StreetlightScreen> {
       });
       final response = await http.get(Uri.parse(url));
       if (response.statusCode == 200) {
-        if (endpoint == 'H') {
+        if (endpoint == 'LED/on') {
           SnackBarDialog.showSuccessFlushBarMessage('Streetlight ON', context);
           return 'Streetlight ON';
-        } else if (endpoint == 'L') {
+        } else if (endpoint == 'LED/off') {
           return 'Streetlight OFF';
         } else if (endpoint == '') {
           final parsedResponse = jsonDecode(response.body);
@@ -58,9 +58,9 @@ class _StreetlightScreenState extends State<StreetlightScreen> {
         SnackBarDialog.showErrorFlushBarMessage(
             response.statusCode.toString(), context);
         setState(() {
-          if (endpoint == 'H') {
+          if (endpoint == 'LED/on') {
             _isTurnOnLoading = false;
-          } else if (endpoint == 'L') {
+          } else if (endpoint == 'LED/off') {
             _isTurnOffLoading = false;
           } else {
             _isLightLoading = false;
@@ -74,9 +74,9 @@ class _StreetlightScreenState extends State<StreetlightScreen> {
       }
       SnackBarDialog.showErrorFlushBarMessage(e.toString(), context);
       setState(() {
-        if (endpoint == 'H') {
+        if (endpoint == 'LED/on') {
           _isTurnOnLoading = false;
-        } else if (endpoint == 'L') {
+        } else if (endpoint == 'LED/off') {
           _isTurnOffLoading = false;
         } else {
           _isLightLoading = false;
@@ -122,7 +122,8 @@ class _StreetlightScreenState extends State<StreetlightScreen> {
                     isLoading: _isTurnOnLoading,
                     text: 'Turn On',
                     padding: 40,
-                    onPressed: () async => await _sendStreetlightRequest('H'),
+                    onPressed: () async =>
+                        await _sendStreetlightRequest('LED/on'),
                   ),
                   SizedBox(height: 20.h),
 
@@ -131,7 +132,8 @@ class _StreetlightScreenState extends State<StreetlightScreen> {
                     isLoading: _isTurnOffLoading,
                     text: 'Turn Off',
                     padding: 40,
-                    onPressed: () async => await _sendStreetlightRequest('L'),
+                    onPressed: () async =>
+                        await _sendStreetlightRequest('LED/off'),
                   ),
                   SizedBox(height: 20.h),
 

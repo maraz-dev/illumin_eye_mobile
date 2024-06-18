@@ -6,6 +6,9 @@ import 'package:illumin_eye_mobile/views/features/streetlight_screen.dart';
 import 'package:illumin_eye_mobile/views/features/survelliance_screen.dart';
 import 'package:illumin_eye_mobile/views/theme/app_theme.dart';
 
+// Replace with IP Address of the ESP32
+const String esp32Url = 'http://192.168.4.1';
+
 void main() {
   runApp(const MyApp());
 }

@@ -2,8 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-// Replace with IP Address of the ESP32
-const String esp32Url = 'http://192.168.4.1';
+import 'package:illumin_eye_mobile/main.dart';
 
 class Service {
   Future<String> sendStreetlightRequest(String endpoint) async {
