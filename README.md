@@ -6,6 +6,6 @@ State Management done with BLoC
 
 ## Arduino
 
-The Arduino Code can be located in lib/arduino-code
+The Arduino Code can be found in [lib/arduino-code] folder
 
 
