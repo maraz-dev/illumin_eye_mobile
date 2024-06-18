@@ -22,6 +22,7 @@ dependencies:
   hooks_riverpod: ^2.5.1
   http: ^1.2.1
   video_player: ^2.6.0
+  webview_flutter: ^4.8.0
 
 dev_dependencies:
   flutter_lints: ^3.0.0
