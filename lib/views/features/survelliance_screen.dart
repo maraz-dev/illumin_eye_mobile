@@ -74,18 +74,18 @@ class _SurvellianceScreenState extends State<SurvellianceScreen> {
                     SizedBox(height: 20.h),
                     // Small Frame Video
 
-                    _controller.value.isInitialized
-                        ? AspectRatio(
-                            aspectRatio: _controller.value.aspectRatio,
-                            child: VideoPlayer(_controller),
-                          )
-                        : const Center(
-                            child: SpinKitDualRing(
-                              color: AppColors.kPrimaryColor,
-                              size: 150,
-                              lineWidth: 2,
-                            ),
-                          ),
+                    // _controller.value.isInitialized
+                    //     ? AspectRatio(
+                    //         aspectRatio: _controller.value.aspectRatio,
+                    //         child: VideoPlayer(_controller),
+                    //       )
+                    //     : const Center(
+                    //         child: SpinKitDualRing(
+                    //           color: AppColors.kPrimaryColor,
+                    //           size: 150,
+                    //           lineWidth: 2,
+                    //         ),
+                    //       ),
 
                     // Space
                     SizedBox(height: 20.h),
