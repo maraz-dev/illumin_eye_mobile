@@ -1,16 +1,11 @@
-# illumin_eye_mobile
+# Illumin Eye Mobile
 
-A new Flutter project.
+Mobile Survelliance Application Using Arduino, ESP32 and ESP Camera
+Mobile Application done with Flutter/Dart
+State Management done with BLoC
 
-## Getting Started
+## Arduino
 
-This project is a starting point for a Flutter application.
+The Arduino Code can be located in lib/arduino-code
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
