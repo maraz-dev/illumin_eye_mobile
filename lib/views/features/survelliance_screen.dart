@@ -1,4 +1,3 @@
-import 'package:appinio_video_player/appinio_video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,7 +7,6 @@ import 'package:illumin_eye_mobile/views/features/vm/survelliance-vm/survellianc
 import 'package:illumin_eye_mobile/views/features/vm/survelliance-vm/survelliance_state.dart';
 import 'package:illumin_eye_mobile/views/theme/app_colors.dart';
 import 'package:illumin_eye_mobile/views/utils/snackbar.dart';
-import 'package:video_player/video_player.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import 'package:illumin_eye_mobile/views/widgets/main_button.dart';
@@ -24,7 +22,7 @@ class SurvellianceScreen extends StatefulWidget {
 class _SurvellianceScreenState extends State<SurvellianceScreen> {
   // Controller for the Video
   //late CachedVideoPlayerController _playerController;
-  late VideoPlayerController _controller;
+  //late VideoPlayerController _controller;
   late WebViewController _webViewController;
   //late CustomVideoPlayerController _customController;
 
@@ -43,7 +41,7 @@ class _SurvellianceScreenState extends State<SurvellianceScreen> {
     _webViewController = WebViewController()..loadHtmlString('''
             <html>
               <body>
-              <img src="$testUrl" width=100% height=100% />
+              <img src="$streamUrl" width=100% height=100% />
               </body>
             </html>
           ''');
