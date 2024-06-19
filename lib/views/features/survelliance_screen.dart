@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:illumin_eye_mobile/main.dart';
 import 'package:illumin_eye_mobile/views/features/vm/survelliance-vm/survelliance_cubit.dart';
 import 'package:illumin_eye_mobile/views/features/vm/survelliance-vm/survelliance_state.dart';
-import 'package:illumin_eye_mobile/views/theme/app_colors.dart';
 import 'package:illumin_eye_mobile/views/utils/snackbar.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -33,11 +31,6 @@ class _SurvellianceScreenState extends State<SurvellianceScreen> {
   }
 
   void initializeVideoPlayer() {
-    // _controller = VideoPlayerController.network('$esp32Url/stream.mp4')
-    //   ..initialize().then((_) {
-    //     setState(() {});
-    //     _controller.play();
-    //   });
     _webViewController = WebViewController()..loadHtmlString('''
             <html>
               <body>
@@ -45,15 +38,6 @@ class _SurvellianceScreenState extends State<SurvellianceScreen> {
               </body>
             </html>
           ''');
-    // _playerController = CachedVideoPlayerController.network(
-    //     '$esp32Url/stream.mp4',
-    //     videoPlayerOptions: VideoPlayerOptions())
-    //   ..initialize().then((_) {
-    //     setState(() {});
-    //     _playerController.play();
-    //   });
-    // _customController = CustomVideoPlayerController(
-    //     context: context, videoPlayerController: _playerController);
   }
 
   @override
@@ -77,30 +61,6 @@ class _SurvellianceScreenState extends State<SurvellianceScreen> {
             builder: (context, state) {
               return Column(
                 children: [
-                  //SizedBox(height: 20.h),
-                  // Small Frame Video
-
-                  // _controller.value.isInitialized
-                  //     ? AspectRatio(
-                  //         aspectRatio: _controller.value.aspectRatio,
-                  //         child: VideoPlayer(_controller),
-                  //       )
-                  //     : const Center(
-                  //         child: SpinKitDualRing(
-                  //           color: AppColors.kPrimaryColor,
-                  //           size: 150,
-                  //           lineWidth: 2,
-                  //         ),
-                  //       ),
-
-                  // Space
-                  //SizedBox(height: 20.h),
-
-                  // Image.network(
-                  //   '$esp32Url/stream.mp4',
-                  //   height: 480,
-                  //   width: double.infinity,
-                  // ),
                   Text(
                     "Live Feed",
                     textAlign: TextAlign.center,
@@ -111,7 +71,7 @@ class _SurvellianceScreenState extends State<SurvellianceScreen> {
 
                   SizedBox(
                       width: double.infinity,
-                      height: 200,
+                      height: 400,
                       child: WebViewWidget(controller: _webViewController)),
 
                   SizedBox(height: 40.h),
