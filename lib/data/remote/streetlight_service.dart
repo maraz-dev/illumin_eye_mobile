@@ -38,7 +38,7 @@ class StreetlightService {
   // Automatic
   Future<String> automaticEndpoint() async {
     try {
-      final response = await http.get(Uri.parse('$esp32Url/'));
+      final response = await http.get(Uri.parse('$esp32Url/LED/auto'));
       _responseHandler.handleResponse(
           response: response,
           onSuccess: () {

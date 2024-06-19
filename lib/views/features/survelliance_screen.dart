@@ -43,7 +43,7 @@ class _SurvellianceScreenState extends State<SurvellianceScreen> {
     _webViewController = WebViewController()..loadHtmlString('''
             <html>
               <body>
-              <img src="$esp32Url/stream.mp4" width="" height="" />
+              <img src="$testUrl" width=100% height=100% />
               </body>
             </html>
           ''');
@@ -103,10 +103,17 @@ class _SurvellianceScreenState extends State<SurvellianceScreen> {
                   //   height: 480,
                   //   width: double.infinity,
                   // ),
-                  Text('here'),
+                  Text(
+                    "Live Feed",
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.displayMedium,
+                  ),
+
+                  SizedBox(height: 10.h),
+
                   SizedBox(
                       width: double.infinity,
-                      height: 250,
+                      height: 200,
                       child: WebViewWidget(controller: _webViewController)),
 
                   SizedBox(height: 40.h),
