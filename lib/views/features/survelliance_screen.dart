@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,15 +21,16 @@ class SurvellianceScreen extends StatefulWidget {
 
 class _SurvellianceScreenState extends State<SurvellianceScreen> {
   // Controller for the Video
-  //late CachedVideoPlayerController _playerController;
-  //late VideoPlayerController _controller;
   late WebViewController _webViewController;
+  Timer? _timer;
+
   //late CustomVideoPlayerController _customController;
 
   @override
   void initState() {
     super.initState();
     initializeVideoPlayer();
+    _startPeriodicUpdate();
   }
 
   void initializeVideoPlayer() {
@@ -38,6 +41,18 @@ class _SurvellianceScreenState extends State<SurvellianceScreen> {
               </body>
             </html>
           ''');
+  }
+
+  void _startPeriodicUpdate() {
+    _timer = Timer.periodic(const Duration(seconds: 90), (timer) {
+      initializeVideoPlayer();
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
   }
 
   @override
