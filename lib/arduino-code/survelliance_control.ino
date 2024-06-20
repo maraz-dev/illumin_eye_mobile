@@ -32,8 +32,8 @@ const char* ssid = "illumineye";
 const char* password = "";
 
 // Static IP configuration
-IPAddress local_IP(172,16,16,31); // Choose an IP outside the DHCP range
-IPAddress gateway(172,16,16,254); // Default gateway IP from ipconfig/ifconfig
+IPAddress local_IP(172,16,16,40); // Choose an IP outside the DHCP range
+IPAddress gateway(172,16,16,40); // Default gateway IP from ipconfig/ifconfig
 IPAddress subnet(255,255,255,0); // Subnet mask from ipconfig/ifconfig
 
 // PIR sensor pins
@@ -194,7 +194,7 @@ void startCameraServer() {
   }
 
   // Start streaming web server
-  server.on("/stream", HTTP_GET, []() {
+  server.on("/stream.mp4", HTTP_GET, []() {
     WiFiClient client = server.client();
     String response = "HTTP/1.1 200 OK\r\n"
                       "Content-Type: multipart/x-mixed-replace; boundary=frame\r\n\r\n";
@@ -226,7 +226,7 @@ void startCameraServer() {
 
 void handleRoot() {
   String html = "<html><body><h1>ESP32CAM Surveillance</h1>";
-  html += "<img src=\"/stream\" width=\"640\" height=\"480\" />";
+  html += "<img src=\"/stream.mp4\" width=\"640\" height=\"480\" />";
   html += "<form action=\"/control\" method=\"GET\">";
   html += "<button name=\"action\" value=\"pan_left\">Pan Left</button>";
   html += "<button name=\"action\" value=\"pan_right\">Pan Right</button>";

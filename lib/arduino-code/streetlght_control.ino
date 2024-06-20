@@ -1,23 +1,25 @@
 #include <WiFi.h>
 #include <WiFiClient.h>
-#include <WiFiAP.h>
 
-const int LDR_PIN = 34;   // LDR pin connected to IO34
-const int MOSFET_PIN = 12; // MOSFET gate pin connected to IO12
+// Constants
+const int LDR_PIN = 34;          // LDR pin connected to IO34
+const int MOSFET_PIN = 12;       // MOSFET gate pin connected to IO12
 const int LIGHT_THRESHOLD = 300; // Threshold value for light intensity
 
-const char *ssid = "illumineye";
+// Wi-Fi Credentials
+const char* ssid = "illumineye";       // Your WiFi SSID
+const char* password = ""; // Your WiFi Password
 
 // Static IP configuration
 IPAddress local_IP(172, 16, 16, 31); // Choose an IP outside the DHCP range
-IPAddress gateway(172, 16, 16, 254); // Default gateway IP from ipconfig/ifconfig
-IPAddress subnet(255, 255, 255, 0); // Subnet mask from ipconfig/ifconfig
+IPAddress gateway(172, 16, 16, 40);   // Default gateway IP
+IPAddress subnet(255, 255, 255, 0);  // Subnet mask
 
 WiFiServer server(80);
 
-bool manualControl = false; // Flag to indicate manual control mode
-bool lightState = false;    // State of the light
-unsigned long lastManualControlTime = 0; // Timestamp of the last manual control action
+bool manualControl = false;          // Flag to indicate manual control mode
+bool lightState = false;             // State of the light
+unsigned long lastManualControlTime = 0;     // Timestamp of the last manual control action
 const unsigned long manualControlTimeout = 60000; // 1 minute timeout for manual control
 
 void setup() {
@@ -26,20 +28,28 @@ void setup() {
 
   Serial.begin(115200);
   Serial.println();
-  Serial.println("Configuring access point...");
+  Serial.println("Connecting to WiFi...");
 
-  // Set the static IP address
-  if (!WiFi.softAPConfig(local_IP, gateway, subnet)) {
-    Serial.println("Failed to configure AP with static IP");
+  // Configure the static IP address
+  if (!WiFi.config(local_IP, gateway, subnet)) {
+    Serial.println("Failed to configure static IP");
   }
 
-  // Start the access point
-  WiFi.softAP(ssid);
-  IPAddress myIP = WiFi.softAPIP();
-  Serial.print("AP IP Address: ");
-  Serial.println(myIP);
+  // Connect to Wi-Fi network
+  WiFi.begin(ssid, password);
+
+  // Wait for connection
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(1000);
+    Serial.print(".");
+  }
+  Serial.println();
+  Serial.println("WiFi connected.");
+  Serial.print("IP address: ");
+  Serial.println(WiFi.localIP());
+
   server.begin();
-  Serial.println("Server Started");
+  Serial.println("Server started.");
 }
 
 void loop() {
@@ -51,7 +61,7 @@ void loop() {
     while (client.connected()) { // Loop while the client's connected
       if (client.available()) { // If there's bytes to read from the client,
         char c = client.read(); // Read a byte
-        Serial.write(c); // Print it out the serial monitor
+        Serial.write(c); // Print it out to the serial monitor
         if (c == '\n') { // If the byte is a newline character
           // If the current line is blank, you got two newline characters in a row.
           // That's the end of the client HTTP request, so send a response:
@@ -61,7 +71,7 @@ void loop() {
             client.println("HTTP/1.1 200 OK");
             client.println("Content-type:text/html");
             client.println();
-            
+
             // Display the HTML web page
             client.println("<!DOCTYPE html><html>");
             client.println("<head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">");
