@@ -69,8 +69,7 @@ class _SurvellianceScreenState extends State<SurvellianceScreen> {
           child: BlocConsumer<SurvellianceCubit, SurvellianceState>(
             listener: (context, state) {
               if (state is SurvellianceErrorState) {
-                SnackBarDialog.showErrorFlushBarMessage(
-                    state.errorMessage, context);
+                SnackBarDialog.showErrorFlushBarMessage(state.errorMessage, context);
               }
             },
             builder: (context, state) {
@@ -86,7 +85,7 @@ class _SurvellianceScreenState extends State<SurvellianceScreen> {
 
                   SizedBox(
                       width: double.infinity,
-                      height: 400,
+                      height: 300,
                       child: WebViewWidget(controller: _webViewController)),
 
                   SizedBox(height: 40.h),
@@ -111,9 +110,7 @@ class _SurvellianceScreenState extends State<SurvellianceScreen> {
                                 isLoading: state is TiltUpLoadingState,
                                 text: 'Tilt Up',
                                 onPressed: () async {
-                                  await BlocProvider.of<SurvellianceCubit>(
-                                          context)
-                                      .tiltUp();
+                                  await BlocProvider.of<SurvellianceCubit>(context).tiltUp();
                                 },
                               ),
                             ),
@@ -123,9 +120,7 @@ class _SurvellianceScreenState extends State<SurvellianceScreen> {
                                 isLoading: state is TiltDownLoadingState,
                                 text: 'Tilt Down',
                                 onPressed: () async {
-                                  await BlocProvider.of<SurvellianceCubit>(
-                                          context)
-                                      .tiltDown();
+                                  await BlocProvider.of<SurvellianceCubit>(context).tiltDown();
                                 },
                               ),
                             ),
@@ -140,8 +135,7 @@ class _SurvellianceScreenState extends State<SurvellianceScreen> {
                             isLoading: state is CenterLoadingState,
                             text: 'Center',
                             onPressed: () async {
-                              await BlocProvider.of<SurvellianceCubit>(context)
-                                  .center();
+                              await BlocProvider.of<SurvellianceCubit>(context).center();
                             },
                           ),
                         ),
@@ -156,9 +150,7 @@ class _SurvellianceScreenState extends State<SurvellianceScreen> {
                                 isLoading: state is PanLeftLoadingState,
                                 text: 'Pan Left',
                                 onPressed: () async {
-                                  await BlocProvider.of<SurvellianceCubit>(
-                                          context)
-                                      .panLeft();
+                                  await BlocProvider.of<SurvellianceCubit>(context).panLeft();
                                 },
                               ),
                             ),
@@ -168,9 +160,7 @@ class _SurvellianceScreenState extends State<SurvellianceScreen> {
                                 isLoading: state is PanRightLoadingState,
                                 text: 'Pan Right',
                                 onPressed: () async {
-                                  await BlocProvider.of<SurvellianceCubit>(
-                                          context)
-                                      .panRight();
+                                  await BlocProvider.of<SurvellianceCubit>(context).panRight();
                                 },
                               ),
                             ),

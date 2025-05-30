@@ -8,8 +8,7 @@ class SurvellianceService {
   // Tilt Up
   Future<String> tiltUpEndpoint() async {
     try {
-      final response =
-          await http.get(Uri.parse('$surveillanceUrl/control?action=tilt_up'));
+      final response = await http.get(Uri.parse('$surveillanceUrl/control?action=tilt_up'));
       _responseHandler.handleResponse(
           response: response,
           onSuccess: () {
@@ -24,8 +23,7 @@ class SurvellianceService {
   // Tilt Down
   Future<String> tiltDownEndpoint() async {
     try {
-      final response = await http
-          .get(Uri.parse('$surveillanceUrl/control?action=tilt_down'));
+      final response = await http.get(Uri.parse('$surveillanceUrl/control?action=tilt_down'));
       _responseHandler.handleResponse(
           response: response,
           onSuccess: () {
@@ -40,8 +38,7 @@ class SurvellianceService {
   // Center
   Future<String> centerEndpoint() async {
     try {
-      final response =
-          await http.get(Uri.parse('$surveillanceUrl/control?action=center'));
+      final response = await http.get(Uri.parse('$surveillanceUrl/control?action=center'));
       _responseHandler.handleResponse(
           response: response,
           onSuccess: () {
@@ -56,8 +53,7 @@ class SurvellianceService {
   // Pan Left
   Future<String> panLeftEndpoint() async {
     try {
-      final response =
-          await http.get(Uri.parse('$surveillanceUrl/control?action=pan_left'));
+      final response = await http.get(Uri.parse('$surveillanceUrl/control?action=pan_left'));
       _responseHandler.handleResponse(
           response: response,
           onSuccess: () {
@@ -72,8 +68,7 @@ class SurvellianceService {
   // Pan Right
   Future<String> panRightEndpoint() async {
     try {
-      final response = await http
-          .get(Uri.parse('$surveillanceUrl/control?action=pan_right'));
+      final response = await http.get(Uri.parse('$surveillanceUrl/control?action=pan_right'));
       _responseHandler.handleResponse(
           response: response,
           onSuccess: () {
