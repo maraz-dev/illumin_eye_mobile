@@ -10,7 +10,11 @@ import 'package:illumin_eye_mobile/views/features/vm/survelliance-vm/survellianc
 import 'package:illumin_eye_mobile/views/theme/app_theme.dart';
 
 // Replace with IP Address of the ESP32
-const String esp32Url = 'http://172.16.16.30';
+const String surveillanceUrl = 'http://172.16.16.40';
+const String streetlightUrl = 'http://172.16.16.31';
+const String streamUrl = "$surveillanceUrl/stream.mp4";
+const String testUrl =
+    "https://cdn.pixabay.com/video/2022/09/05/130274-746686710_large.mp4";
 
 void main() {
   runApp(const MyApp());

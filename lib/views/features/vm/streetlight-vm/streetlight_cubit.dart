@@ -18,7 +18,7 @@ class StreetlightCubit extends Cubit<StreetlightState> {
   }
 
   Future<void> turnOff() async {
-    emit(TurnOnLoadingState());
+    emit(TurnOffLoadingState());
     try {
       final response = await _service.turnOffEndpoint();
       emit(TurnOffSuccessfulState(message: response));
@@ -28,7 +28,7 @@ class StreetlightCubit extends Cubit<StreetlightState> {
   }
 
   Future<void> automatic() async {
-    emit(TurnOnLoadingState());
+    emit(AutomaticLoadingState());
     try {
       final response = await _service.automaticEndpoint();
       emit(AutomaticSuccessfulState(message: response));

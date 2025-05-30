@@ -8,7 +8,7 @@ class StreetlightService {
   // Turn ON
   Future<String> turnOnEndpoint() async {
     try {
-      final response = await http.get(Uri.parse('$esp32Url/LED/on'));
+      final response = await http.get(Uri.parse('$streetlightUrl/LED/on'));
       _responseHandler.handleResponse(
           response: response,
           onSuccess: () {
@@ -23,7 +23,7 @@ class StreetlightService {
   // Turn OFF
   Future<String> turnOffEndpoint() async {
     try {
-      final response = await http.get(Uri.parse('$esp32Url/LED/off'));
+      final response = await http.get(Uri.parse('$streetlightUrl/LED/off'));
       _responseHandler.handleResponse(
           response: response,
           onSuccess: () {
@@ -38,7 +38,7 @@ class StreetlightService {
   // Automatic
   Future<String> automaticEndpoint() async {
     try {
-      final response = await http.get(Uri.parse('$esp32Url/'));
+      final response = await http.get(Uri.parse('$streetlightUrl/LED/auto'));
       _responseHandler.handleResponse(
           response: response,
           onSuccess: () {

@@ -9,7 +9,7 @@ class SurvellianceService {
   Future<String> tiltUpEndpoint() async {
     try {
       final response =
-          await http.get(Uri.parse('$esp32Url/control?action=tilt_up'));
+          await http.get(Uri.parse('$surveillanceUrl/control?action=tilt_up'));
       _responseHandler.handleResponse(
           response: response,
           onSuccess: () {
@@ -24,8 +24,8 @@ class SurvellianceService {
   // Tilt Down
   Future<String> tiltDownEndpoint() async {
     try {
-      final response =
-          await http.get(Uri.parse('$esp32Url/control?action=tilt_down'));
+      final response = await http
+          .get(Uri.parse('$surveillanceUrl/control?action=tilt_down'));
       _responseHandler.handleResponse(
           response: response,
           onSuccess: () {
@@ -41,7 +41,7 @@ class SurvellianceService {
   Future<String> centerEndpoint() async {
     try {
       final response =
-          await http.get(Uri.parse('$esp32Url/control?action=center'));
+          await http.get(Uri.parse('$surveillanceUrl/control?action=center'));
       _responseHandler.handleResponse(
           response: response,
           onSuccess: () {
@@ -57,7 +57,7 @@ class SurvellianceService {
   Future<String> panLeftEndpoint() async {
     try {
       final response =
-          await http.get(Uri.parse('$esp32Url/control?action=pan_left'));
+          await http.get(Uri.parse('$surveillanceUrl/control?action=pan_left'));
       _responseHandler.handleResponse(
           response: response,
           onSuccess: () {
@@ -72,8 +72,8 @@ class SurvellianceService {
   // Pan Right
   Future<String> panRightEndpoint() async {
     try {
-      final response =
-          await http.get(Uri.parse('$esp32Url/control?action=pan_right'));
+      final response = await http
+          .get(Uri.parse('$surveillanceUrl/control?action=pan_right'));
       _responseHandler.handleResponse(
           response: response,
           onSuccess: () {
@@ -88,7 +88,7 @@ class SurvellianceService {
   // Detect Motion
   Future<String> detectMotionEndpoint() async {
     try {
-      final response = await http.get(Uri.parse('$esp32Url/status'));
+      final response = await http.get(Uri.parse('$surveillanceUrl/status'));
       _responseHandler.handleResponse(
           response: response,
           onSuccess: () {
@@ -102,13 +102,13 @@ class SurvellianceService {
 
   Future<String> streamEndpoint() async {
     try {
-      final response = await http.get(Uri.parse('$esp32Url/stream'));
+      final response = await http.get(Uri.parse('$surveillanceUrl/stream'));
       _responseHandler.handleResponse(
           response: response,
           onSuccess: () {
             return 'Stream Started';
           });
-      return '$esp32Url/stream';
+      return '$surveillanceUrl/stream';
     } catch (e) {
       throw e.toString();
     }
